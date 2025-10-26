@@ -1,0 +1,195 @@
+<!-- Hero Section -->
+<section class="hero-section bg-primary text-white py-5">
+  <div class="container">
+    <div class="row align-items-center">
+      <div class="col-lg-6">
+        <h1 class="display-4 fw-bold mb-4">Bienvenido al Catálogo de Películas</h1>
+        <p class="lead mb-4">Descubre, organiza y gestiona tu colección de películas favoritas en un solo lugar.</p>
+
+        <div class="d-flex gap-3 flex-wrap">
+          <a *ngIf="!isLoggedIn" routerLink="/register" class="btn btn-light btn-lg px-4">
+            <i class="bi bi-person-plus me-2"></i>Crear Cuenta
+          </a>
+          <a *ngIf="!isLoggedIn" routerLink="/login" class="btn btn-outline-light btn-lg px-4">
+            <i class="bi bi-box-arrow-in-right me-2"></i>Iniciar Sesión
+          </a>
+          <a *ngIf="isLoggedIn" routerLink="/catalogo" class="btn btn-light btn-lg px-4">
+            <i class="bi bi-collection-play me-2"></i>Ver Catálogo
+          </a>
+        </div>
+      </div>
+      <div class="col-lg-6 text-center">
+        <img
+          src="https://cdn-icons-png.flaticon.com/512/2455/2455972.png"
+          alt="Catálogo de Películas"
+          class="img-fluid"
+          style="max-width: 300px;"
+        >
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- Features Section -->
+<section class="py-5">
+  <div class="container">
+    <div class="text-center mb-5">
+      <h2 class="fw-bold">Características Principales</h2>
+      <p class="lead text-muted">Todo lo que necesitas para gestionar tu colección de películas</p>
+    </div>
+
+    <div class="row g-4">
+      <!-- Feature 1 -->
+      <div class="col-md-4">
+        <div class="card h-100 border-0 shadow-sm">
+          <div class="card-body text-center p-4">
+            <div class="feature-icon mb-3">
+              <i class="bi bi-plus-circle-fill text-primary" style="font-size: 2.5rem;"></i>
+            </div>
+            <h4 class="card-title">Agregar Películas</h4>
+            <p class="card-text">Añade nuevas películas a tu catálogo con información detallada como nombre, año, sinopsis y portada.</p>
+          </div>
+        </div>
+      </div>
+
+      <!-- Feature 2 -->
+      <div class="col-md-4">
+        <div class="card h-100 border-0 shadow-sm">
+          <div class="card-body text-center p-4">
+            <div class="feature-icon mb-3">
+              <i class="bi bi-pencil-fill text-primary" style="font-size: 2.5rem;"></i>
+            </div>
+            <h4 class="card-title">Editar Contenido</h4>
+            <p class="card-text">Modifica la información de tus películas en cualquier momento para mantener tu catálogo actualizado.</p>
+          </div>
+        </div>
+      </div>
+
+      <!-- Feature 3 -->
+      <div class="col-md-4">
+        <div class="card h-100 border-0 shadow-sm">
+          <div class="card-body text-center p-4">
+            <div class="feature-icon mb-3">
+              <i class="bi bi-eye-fill text-primary" style="font-size: 2.5rem;"></i>
+            </div>
+            <h4 class="card-title">Visualización Elegante</h4>
+            <p class="card-text">Disfruta de una interfaz moderna y responsive que hace que navegar por tu colección sea un placer.</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- How It Works Section -->
+<section class="bg-light py-5">
+  <div class="container">
+    <div class="text-center mb-5">
+      <h2 class="fw-bold">¿Cómo Funciona?</h2>
+      <p class="lead text-muted">Sigue estos simples pasos para comenzar</p>
+    </div>
+
+    <div class="row align-items-center">
+      <div class="col-lg-6">
+        <div class="steps">
+          <div class="step d-flex align-items-center mb-4">
+            <div class="step-number bg-primary text-white rounded-circle d-flex align-items-center justify-content-center me-4" style="width: 50px; height: 50px;">
+              <span class="fw-bold">1</span>
+            </div>
+            <div>
+              <h4 class="fw-bold">Regístrate</h4>
+              <p class="text-muted mb-0">Crea una cuenta gratuita para comenzar a usar la aplicación.</p>
+            </div>
+          </div>
+
+          <div class="step d-flex align-items-center mb-4">
+            <div class="step-number bg-primary text-white rounded-circle d-flex align-items-center justify-content-center me-4" style="width: 50px; height: 50px;">
+              <span class="fw-bold">2</span>
+            </div>
+            <div>
+              <h4 class="fw-bold">Agrega Películas</h4>
+              <p class="text-muted mb-0">Comienza añadiendo tus películas favoritas al catálogo.</p>
+            </div>
+          </div>
+
+          <div class="step d-flex align-items-center mb-4">
+            <div class="step-number bg-primary text-white rounded-circle d-flex align-items-center justify-content-center me-4" style="width: 50px; height: 50px;">
+              <span class="fw-bold">3</span>
+            </div>
+            <div>
+              <h4 class="fw-bold">Organiza y Disfruta</h4>
+              <p class="text-muted mb-0">Visualiza y gestiona tu colección de películas fácilmente.</p>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="col-lg-6 text-center">
+        <img
+          src="https://cdn-icons-png.flaticon.com/512/2867/2867705.png"
+          alt="Cómo funciona"
+          class="img-fluid"
+          style="max-width: 300px;"
+        >
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- Call to Action -->
+<section class="py-5">
+  <div class="container">
+    <div class="text-center">
+      <h2 class="fw-bold mb-3">¿Listo para comenzar?</h2>
+      <p class="lead text-muted mb-4">Únete a nuestra comunidad de amantes del cine y organiza tu colección hoy mismo.</p>
+      <a *ngIf="!isLoggedIn" routerLink="/register" class="btn btn-primary btn-lg px-5">
+        <i class="bi bi-rocket-takeoff me-2"></i>Comenzar Ahora
+      </a>
+      <a *ngIf="isLoggedIn" routerLink="/catalogo" class="btn btn-primary btn-lg px-5">
+        <i class="bi bi-collection-play me-2"></i>Ver Mi Catálogo
+      </a>
+    </div>
+  </div>
+</section>
+<footer class="bg-dark text-white pt-5 pb-3">
+  <div class="container">
+    <div class="row">
+      <div class="col-md-4 mb-4">
+        <h5 class="fw-bold mb-3">Catálogo de Películas</h5>
+        <p class="text-muted small">Tu gestor personal para la colección de cine. Simple, rápido y elegante.</p>
+      </div>
+
+      <div class="col-md-4 mb-4">
+        <h5 class="fw-bold mb-3">Contacto</h5>
+        <ul class="list-unstyled">
+          <li class="mb-2">
+            <i class="bi bi-envelope-fill me-2 text-primary"></i>
+            <a href="mailto:ascebar@gmail.com" class="text-white text-decoration-none">Ulises Barron</a>
+          </li>
+          <li class="mb-2">
+            <i class="bi bi-phone-fill me-2 text-primary"></i>
+            <a href="tel:+34123456789" class="text-white text-decoration-none">+34 123 456 789</a>
+          </li>
+          <li class="mb-2">
+            <i class="bi bi-geo-alt-fill me-2 text-primary"></i>
+           UDG 223371669
+          </li>
+        </ul>
+      </div>
+      <div class="col-md-4 mb-4">
+        <h5 class="fw-bold mb-3">Síguenos</h5>
+        <div class="d-flex fs-4 gap-3">
+            <a href="#" class="text-white"><i class="bi bi-facebook"></i></a>
+            <a href="#" class="text-white"><i class="bi bi-twitter"></i></a>
+            <a href="#" class="text-white"><i class="bi bi-instagram"></i></a>
+        </div>
+    </div>
+    </div>
+
+    <hr class="my-3 border-secondary">
+
+    <div class="text-center">
+        <p class="text-muted mb-0 small">&copy; 2025 Catálogo de Películas. Todos los derechos reservados.</p>
+    </div>
+  </div>
+</footer>

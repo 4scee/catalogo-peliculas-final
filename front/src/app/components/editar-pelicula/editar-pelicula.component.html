@@ -1,0 +1,180 @@
+<div class="container mt-4">
+  <div class="row justify-content-center">
+    <div class="col-lg-10">
+      <!-- Header -->
+      <div class="d-flex align-items-center mb-4">
+        <button class="btn btn-outline-secondary me-3" (click)="onCancel()" [disabled]="isSaving">
+          <i class="bi bi-arrow-left"></i>
+        </button>
+        <h1 class="h3 mb-0 text-primary">
+          <i class="bi bi-pencil-square me-2"></i>Editar Película
+        </h1>
+      </div>
+
+      <!-- Loading State -->
+      <div *ngIf="isLoading" class="text-center py-5">
+        <div class="spinner-border text-primary" role="status">
+          <span class="visually-hidden">Cargando...</span>
+        </div>
+        <p class="mt-3">Cargando datos de la película...</p>
+      </div>
+
+      <!-- Error State -->
+      <div *ngIf="errorMessage && !isLoading" class="alert alert-danger">
+        <i class="bi bi-exclamation-triangle-fill me-2"></i>
+        {{ errorMessage }}
+      </div>
+
+      <!-- Success Message -->
+      <div *ngIf="successMessage" class="alert alert-success">
+        <i class="bi bi-check-circle-fill me-2"></i>
+        {{ successMessage }}
+      </div>
+
+      <!-- Edit Form -->
+      <div *ngIf="!isLoading" class="card shadow">
+        <div class="card-body">
+          <div class="row">
+            <!-- Form Column -->
+            <div class="col-md-6">
+              <form (ngSubmit)="onSubmit()" #editForm="ngForm" novalidate>
+                <!-- Nombre -->
+                <div class="mb-3">
+                  <label for="nombre" class="form-label">Nombre *</label>
+                  <input
+                    type="text"
+                    class="form-control"
+                    id="nombre"
+                    name="nombre"
+                    [(ngModel)]="pelicula.nombre"
+                    required
+                    minlength="2"
+                    maxlength="255"
+                    placeholder="Nombre de la película"
+                    [class.is-invalid]="errorMessage && !pelicula.nombre"
+                  >
+                </div>
+
+                <!-- Año -->
+                <div class="mb-3">
+                  <label for="anio" class="form-label">Año *</label>
+                  <input
+                    type="number"
+                    class="form-control"
+                    id="anio"
+                    name="anio"
+                    [(ngModel)]="pelicula.anio"
+                    required
+                    min="1900"
+                    [max]="currentYear + 5"
+                    placeholder="Año de estreno"
+                    [class.is-invalid]="errorMessage && (!pelicula.anio || pelicula.anio < 1900)"
+                  >
+                </div>
+
+                <!-- Imagen URL -->
+                <div class="mb-3">
+                  <label for="imagen" class="form-label">URL de la Imagen *</label>
+                  <input
+                    type="url"
+                    class="form-control"
+                    id="imagen"
+                    name="imagen"
+                    [(ngModel)]="pelicula.imagen"
+                    required
+                    placeholder="https://ejemplo.com/imagen.jpg"
+                    [class.is-invalid]="errorMessage && !pelicula.imagen"
+                  >
+                  <div class="form-text">La URL debe comenzar con http:// o https://</div>
+                </div>
+
+                <!-- Sinopsis -->
+                <div class="mb-4">
+                  <label for="sinopsis" class="form-label">Sinopsis *</label>
+                  <textarea
+                    class="form-control"
+                    id="sinopsis"
+                    name="sinopsis"
+                    [(ngModel)]="pelicula.sinopsis"
+                    required
+                    rows="4"
+                    minlength="10"
+                    maxlength="1000"
+                    placeholder="Describe la trama de la película..."
+                    [class.is-invalid]="errorMessage && !pelicula.sinopsis"
+                  ></textarea>
+                </div>
+
+                <!-- Action Buttons -->
+                <div class="d-grid gap-2 d-md-flex">
+                  <button
+                    type="button"
+                    class="btn btn-outline-secondary flex-fill"
+                    (click)="onCancel()"
+                    [disabled]="isSaving"
+                  >
+                    <i class="bi bi-x-circle me-2"></i>Cancelar
+                  </button>
+                  
+                  <button
+                    type="submit"
+                    class="btn btn-primary flex-fill"
+                    [disabled]="isSaving"
+                  >
+                    <span *ngIf="!isSaving">
+                      <i class="bi bi-check-circle me-2"></i>Guardar Cambios
+                    </span>
+                    <span *ngIf="isSaving">
+                      <span class="spinner-border spinner-border-sm me-2" role="status"></span>
+                      Guardando...
+                    </span>
+                  </button>
+                </div>
+              </form>
+            </div>
+
+            <!-- Preview Column -->
+            <div class="col-md-6">
+              <div class="sticky-top" style="top: 20px;">
+                <h5 class="text-center mb-3 text-muted">Vista Previa</h5>
+                
+                <!-- Image Preview -->
+                <div class="card mb-3">
+                  <img 
+                    [src]="imagePreview" 
+                    class="card-img-top" 
+                    alt="Vista previa"
+                    style="height: 250px; object-fit: cover;"
+                    onerror="this.src='https://via.placeholder.com/300x200?text=Error+al+cargar+imagen'"
+                  >
+                  <div class="card-body">
+                    <h6 class="card-title">{{ pelicula.nombre || 'Nombre de la Película' }}</h6>
+                    <p class="card-text text-muted small">
+                      <strong>Año:</strong> {{ pelicula.anio || '----' }}
+                    </p>
+                    <p class="card-text small">
+                      {{ (pelicula.sinopsis || 'Sinopsis de la película...') | slice:0:120 }}{{ pelicula.sinopsis && pelicula.sinopsis.length > 120 ? '...' : '' }}
+                    </p>
+                  </div>
+                </div>
+
+                <!-- Validation Tips -->
+                <div class="alert alert-info">
+                  <h6 class="alert-heading mb-2">
+                    <i class="bi bi-lightbulb me-2"></i>Requisitos
+                  </h6>
+                  <ul class="mb-0 small">
+                    <li>Nombre: 2-255 caracteres</li>
+                    <li>Año: 1900 - {{ currentYear + 5 }}</li>
+                    <li>Sinopsis: mínimo 10 caracteres</li>
+                    <li>Imagen: URL válida</li>
+                  </ul>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

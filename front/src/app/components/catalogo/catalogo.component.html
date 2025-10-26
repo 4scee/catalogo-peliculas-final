@@ -1,0 +1,32 @@
+<div class="container mt-4">
+  <div class="d-flex justify-content-between align-items-center mb-4">
+    <h2>Catálogo de Películas</h2>
+    <button class="btn btn-primary" (click)="addMovie()">
+      <i class="bi bi-plus-circle"></i> Agregar Película
+    </button>
+  </div>
+
+  <div class="row" *ngIf="movies.length > 0; else noMovies">
+    <div class="col-md-4 mb-4" *ngFor="let movie of movies">
+      <div class="card h-100">
+        <img [src]="movie.imagen" class="card-img-top" [alt]="movie.nombre" style="height: 300px; object-fit: cover;">
+        <div class="card-body">
+          <h5 class="card-title">
+            <a (click)="viewMovieDetails(movie.id)" style="cursor: pointer; text-decoration: none;">
+              {{ movie.nombre }}
+            </a>
+          </h5>
+          <!-- CAMBIA ESTA LÍNEA: -->
+          <p class="card-text"><strong>Año:</strong> {{ movie.anio }}</p>
+          <!-- de movie.año a movie.anio -->
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <ng-template #noMovies>
+    <div class="alert alert-info">
+      No hay películas en el catálogo. ¡Agrega la primera!
+    </div>
+  </ng-template>
+</div>

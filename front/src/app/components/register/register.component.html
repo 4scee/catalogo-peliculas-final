@@ -1,0 +1,134 @@
+<div class="container mt-5">
+  <div class="row justify-content-center">
+    <div class="col-md-8 col-lg-6">
+      <div class="card shadow">
+        <div class="card-body p-4">
+          <h2 class="card-title text-center mb-4">Crear Cuenta</h2>
+          
+          <!-- Mensaje de éxito -->
+          <div *ngIf="successMessage" class="alert alert-success" role="alert">
+            {{ successMessage }}
+          </div>
+
+          <!-- Mensaje de error -->
+          <div *ngIf="errorMessage" class="alert alert-danger" role="alert">
+            {{ errorMessage }}
+          </div>
+
+          <form (ngSubmit)="onSubmit()" #registerForm="ngForm">
+            <!-- Campo Nombre -->
+            <div class="mb-3">
+              <label for="nombre" class="form-label">Nombre Completo</label>
+              <input
+                type="text"
+                class="form-control"
+                id="nombre"
+                name="nombre"
+                [(ngModel)]="user.nombre"
+                required
+                minlength="2"
+                maxlength="100"
+                placeholder="Tu nombre completo"
+              >
+              <div *ngIf="registerForm.controls['nombre']?.invalid && registerForm.controls['nombre']?.touched" 
+                   class="text-danger small">
+                El nombre debe tener entre 2 y 100 caracteres
+              </div>
+            </div>
+
+            <!-- Campo Email -->
+            <div class="mb-3">
+              <label for="email" class="form-label">Correo Electrónico</label>
+              <input
+                type="email"
+                class="form-control"
+                id="email"
+                name="email"
+                [(ngModel)]="user.email"
+                required
+                email
+                placeholder="tu@email.com"
+              >
+              <div *ngIf="registerForm.controls['email']?.invalid && registerForm.controls['email']?.touched" 
+                   class="text-danger small">
+                Por favor ingresa un correo válido
+              </div>
+            </div>
+
+            <!-- Campo Contraseña -->
+            <div class="mb-3">
+              <label for="password" class="form-label">Contraseña</label>
+              <input
+                type="password"
+                class="form-control"
+                id="password"
+                name="password"
+                [(ngModel)]="user.password"
+                required
+                minlength="6"
+                placeholder="Mínimo 6 caracteres"
+              >
+              <div *ngIf="registerForm.controls['password']?.invalid && registerForm.controls['password']?.touched" 
+                   class="text-danger small">
+                La contraseña debe tener al menos 6 caracteres
+              </div>
+            </div>
+
+            <!-- Campo Confirmar Contraseña -->
+            <div class="mb-3">
+              <label for="password_confirmation" class="form-label">Confirmar Contraseña</label>
+              <input
+                type="password"
+                class="form-control"
+                id="password_confirmation"
+                name="password_confirmation"
+                [(ngModel)]="user.password_confirmation"
+                required
+                placeholder="Repite tu contraseña"
+              >
+              <div *ngIf="user.password !== user.password_confirmation && registerForm.controls['password_confirmation']?.touched" 
+                   class="text-danger small">
+                Las contraseñas no coinciden
+              </div>
+            </div>
+
+            <!-- Campo Imagen de Perfil -->
+            <div class="mb-4">
+              <label for="imagen_perfil" class="form-label">Imagen de Perfil (Opcional)</label>
+              <input
+                type="file"
+                class="form-control"
+                id="imagen_perfil"
+                name="imagen_perfil"
+                (change)="onFileSelected($event)"
+                accept="image/*"
+              >
+              <div class="form-text">Selecciona una imagen para tu perfil (opcional)</div>
+              
+              <!-- Vista previa de la imagen -->
+              <div *ngIf="user.imagen_perfil" class="mt-2">
+                <img [src]="user.imagen_perfil" alt="Vista previa" class="img-thumbnail" style="max-width: 100px; max-height: 100px;">
+              </div>
+            </div>
+
+            <!-- Botón de Submit -->
+            <button
+              type="submit"
+              class="btn btn-primary w-100 mb-3"
+              [disabled]="registerForm.invalid || user.password !== user.password_confirmation"
+            >
+              Registrarse
+            </button>
+
+            <!-- Enlace a Login -->
+            <div class="text-center">
+              <p>¿Ya tienes cuenta? 
+                <a routerLink="/login" class="text-decoration-none">Inicia sesión aquí</a>
+              </p>
+            </div>
+          </form>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
