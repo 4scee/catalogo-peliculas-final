@@ -12,8 +12,13 @@ if [ ! -f .env ]; then
 fi
 php artisan key:generate --force
 
-# Instalar dependencias
+# Instalar dependencias de Laravel
 composer install --no-dev --optimize-autoloader
+
+# Limpiar caches
+php artisan config:cache
+php artisan route:cache
+php artisan view:cache
 
 # ───────────────────────────────
 # Frontend (Angular)
@@ -23,15 +28,16 @@ npm install
 npm run build -- --configuration production
 
 # ───────────────────────────────
-# Copiar Angular al public de Laravel
+# Copiar Angular compilado a public/
 # ───────────────────────────────
 rm -rf ../movie-catalog-backend/public/*
 cp -r dist/front/* ../movie-catalog-backend/public/
 
 # ───────────────────────────────
-# Volver al backend y levantar Laravel
+# Final
 # ───────────────────────────────
-cd ../movie-catalog-backend
-php artisan config:cache
-php artisan route:cache
-php artisan serve --host=0.0.0.0 --port=$PORT
+echo "✅ Build completo. Laravel será servido por Apache en el puerto 80"
+# Apache ya arrancará automáticamente porque estamos usando php:8.2-apache
+# No necesitamos php artisan serve
+tail -f /dev/null
+
